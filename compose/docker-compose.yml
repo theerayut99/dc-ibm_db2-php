@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+    php-fpm:
+        build: ./php-fpm
+        volumes:
+            - ../src:/var/www/html
+
+    nginx:
+        build: ./nginx
+        volumes:
+            - ../src:/var/www/html
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/sites/:/etc/nginx/sites-available
+            - ./nginx/conf.d/:/etc/nginx/conf.d
+        depends_on:
+            - php-fpm
+        ports:
+            - "80:80"
+            - "443:443"
+
+    db2:
+        image: ibmcom/db2
+        privileged: true
+        ports:
+            - "50000:50000"
+        volumes:
+            - ./database:/database
+        env_file:
+            - ./.env_list
