@@ -17,7 +17,7 @@ ADD resources/PDO_IBM-1.3.5.tgz /
 RUN yes '/clidriver' | pecl install ibm_db2 && docker-php-ext-enable ibm_db2
 
 # for IBM_PDO we have have to do it manually
-RUN cd /PDO_IBM-1.3.4 && phpize && ./configure --with-pdo-ibm=/clidriver && make install && docker-php-ext-enable pdo_ibm
+RUN cd /PDO_IBM-1.3.5 && phpize && ./configure --with-pdo-ibm=/clidriver && make install && docker-php-ext-enable pdo_ibm
 
 CMD ["php-fpm"]
 
