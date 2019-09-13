@@ -21,7 +21,7 @@ services:
             - "443:443"
 
     db2:
-        image: ibmcom/db2
+        build: ./db2
         privileged: true
         ports:
             - "50000:50000"
