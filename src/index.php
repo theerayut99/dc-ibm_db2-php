@@ -33,14 +33,6 @@
         echo "Can not Create Table.";
     }
 
-    // Populate the test table
-    // $animals = array(
-    //     array(1, 'แมว', 'ปุ๊ก', 3.2),
-    //     array(2, 'หมา', 'ปิ๊ก', 12.3),
-    //     array(3, 'ม้า', 'สมาร์ทตี้', 350.0),
-    //     array(4, 'ลา', 'สวีทเตอร์', 150)
-    // );
-
     $animals = array(
         array(0, 'cat', 'Pook', 3.2),
         array(1, 'dog', 'Peaches', 12.3),
@@ -54,15 +46,15 @@
     foreach ($animals as $animal) {
         $rc = db2_exec($conn, "INSERT INTO animals (id, breed, name, weight) VALUES ({$animal[0]}, '{$animal[1]}', '{$animal[2]}', {$animal[3]})");
         if ($rc) {
-            print "Insert... ";
+            echo "Insert... <br>";
         }
     }
 
     $sql = "SELECT name FROM animals WHERE weight < 10.0 ORDER BY name";
     if ($conn) {
-        $stmt = db2_exec($conn, $sql, array('cursor' => DB2_SCROLLABLE));
+        $stmt = db2_exec($conn, $sql);
         while ($row = db2_fetch_array($stmt)) {
-            echo "$row[0]\n<br>";
+            echo "$row[0]<br>";
         }
     }
     db2_close($conn);
